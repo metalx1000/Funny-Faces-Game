@@ -19,7 +19,7 @@
 
 </body>
   <script>
-    var face,glasses,selected,plus,minus;
+    var face,glasses,selected,plus,minus,mus;
     var winW = window.innerWidth;            
     var winH = window.innerHeight;
     var game = new Phaser.Game(winW, winH, Phaser.AUTO, 'faces', { preload: preload, create: create });
@@ -32,6 +32,7 @@
       game.load.image('minus', 'res/minus.png');
       game.load.image('r1', 'res/rotate_1.png');
       game.load.image('r2', 'res/rotate_2.png');
+      game.load.image('mus', 'res/mus_1.png');
     }
 
     function create() {
@@ -46,6 +47,13 @@
       glasses.input.enableDrag(true);
       glasses.events.onInputDown.add(select, {obj:glasses});
       selected = glasses;
+
+      //add mustaches
+      mus = game.add.sprite(game.width/2, game.height/2 + 100, 'mus'); 
+      mus.anchor.set(0.5); 
+      mus.inputEnabled = true;
+      mus.input.enableDrag(true);
+      mus.events.onInputDown.add(select, {obj:mus});
 
       //add size buttons
       plus = game.add.sprite(10, 10, 'plus');
