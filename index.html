@@ -29,7 +29,7 @@
       game.load.image('face', 'res/face_1.jpg');
       game.load.image('glasses', 'res/glasses_1.png');
       game.load.image('mus', 'res/mus_1.png');
-      for(var i = 1;i<=2;i++){
+      for(var i = 1;i<=8;i++){
         game.load.image('hat_'+i, 'res/hat_'+i+'.png');
       }
 
@@ -67,7 +67,7 @@
       hat.anchor.set(0.5); 
       hat.inputEnabled = true;
       hat.input.enableDrag(true);
-      hat.max = 2;
+      hat.max = 8;
       hat.events.onInputDown.add(select, {obj:hat});
 
       //add size buttons
@@ -117,6 +117,7 @@
 
       selected.loadTexture(k[0] + "_" + k[1], 0);
     }
+
   </script>
 </html>
 
