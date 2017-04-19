@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="libs/phaser.min.js"></script>
+</head>
+<body>
+
+</body>
+  <script>
+    var winW = window.innerWidth;            
+    var winH = window.innerHeight;
+//    var winW = 500;
+//    var winH = 500;
+var game = new Phaser.Game(winW, winH, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+
+function preload() {
+
+    //  You can fill the preloader with as many assets as your game requires
+
+    //  Here we are loading an image. The first parameter is the unique
+    //  string by which we'll identify the image later in our code.
+
+    //  The second parameter is the URL of the image (relative)
+    game.load.image('einstein', 'res/face_1.jpg');
+
+}
+
+function create() {
+
+    //  This creates a simple sprite that is using our loaded image and
+    //  displays it on-screen
+    game.add.sprite(0, 0, 'einstein');
+
+}
+    
+  </script>
+</html>
+

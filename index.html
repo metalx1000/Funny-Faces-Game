@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Funny Faces</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="libs/phaser.min.js"></script>
+  <style>
+    html,body{
+      padding:0px;
+    }
+  </style>
+</head>
+<body>
+
+
+</body>
+  <script>
+    var face,glasses,selected,plus,minus;
+    var winW = window.innerWidth;            
+    var winH = window.innerHeight;
+    var game = new Phaser.Game(winW, winH, Phaser.AUTO, 'faces', { preload: preload, create: create });
+
+
+    function preload() {
+      game.load.image('face', 'res/face_1.jpg');
+      game.load.image('glasses', 'res/glasses_1.png');
+      game.load.image('plus', 'res/plus.png');
+      game.load.image('minus', 'res/minus.png');
+      game.load.image('r1', 'res/rotate_1.png');
+      game.load.image('r2', 'res/rotate_2.png');
+    }
+
+    function create() {
+      //add face
+      face = game.add.sprite(game.width/2, game.height/2, 'face'); 
+      face.anchor.set(0.5); 
+      
+      //add glasses
+      glasses = game.add.sprite(game.width/2, game.height/2, 'glasses'); 
+      glasses.anchor.set(0.5); 
+      glasses.inputEnabled = true;
+      glasses.input.enableDrag(true);
+      glasses.events.onInputDown.add(select, {obj:glasses});
+      selected = glasses;
+
+      //add size buttons
+      plus = game.add.sprite(10, 10, 'plus');
+      plus.inputEnabled = true;
+      plus.events.onInputDown.add(size, { s : .1 } );  
+
+      minus = game.add.sprite(10, 110, 'minus'); 
+      minus.inputEnabled = true;
+      minus.events.onInputDown.add(size, { s : -.1 } );  
+
+      //add rotate buttons 
+      r1 = game.add.sprite(10, 210, 'r1'); 
+      r1.inputEnabled = true;
+      r1.events.onInputDown.add(rotate, { r : 1 } );  
+
+      r2 = game.add.sprite(10, 310, 'r2'); 
+      r2.inputEnabled = true;
+      r2.events.onInputDown.add(rotate, { r : -1 } );  
+    }
+
+    function select(){
+      selected = this.obj;
+    }
+
+    function size(){
+      var s = selected.scale.x + this.s;
+      selected.scale.setTo(s);
+    }
+
+    function rotate(){
+      selected.angle += this.r;
+    }
+
+  </script>
+</html>
+
