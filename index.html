@@ -19,7 +19,7 @@
 
 </body>
   <script>
-    var face,glasses,selected,plus,minus,mus;
+    var face,glasses,selected,plus,minus,mus,hat;
     var winW = window.innerWidth;            
     var winH = window.innerHeight;
     var game = new Phaser.Game(winW, winH, Phaser.AUTO, 'faces', { preload: preload, create: create });
@@ -28,11 +28,17 @@
     function preload() {
       game.load.image('face', 'res/face_1.jpg');
       game.load.image('glasses', 'res/glasses_1.png');
+      game.load.image('mus', 'res/mus_1.png');
+      for(var i = 1;i<=2;i++){
+        game.load.image('hat_'+i, 'res/hat_'+i+'.png');
+      }
+
+      //controls
       game.load.image('plus', 'res/plus.png');
       game.load.image('minus', 'res/minus.png');
       game.load.image('r1', 'res/rotate_1.png');
       game.load.image('r2', 'res/rotate_2.png');
-      game.load.image('mus', 'res/mus_1.png');
+      game.load.image('next', 'res/next.png');
     }
 
     function create() {
@@ -46,6 +52,7 @@
       glasses.inputEnabled = true;
       glasses.input.enableDrag(true);
       glasses.events.onInputDown.add(select, {obj:glasses});
+      glasses.max = 1;
       selected = glasses;
 
       //add mustaches
@@ -54,6 +61,14 @@
       mus.inputEnabled = true;
       mus.input.enableDrag(true);
       mus.events.onInputDown.add(select, {obj:mus});
+      mus.max = 1;
+      //add hat
+      hat = game.add.sprite(game.width/2, game.height/2 - 100, 'hat_1'); 
+      hat.anchor.set(0.5); 
+      hat.inputEnabled = true;
+      hat.input.enableDrag(true);
+      hat.max = 2;
+      hat.events.onInputDown.add(select, {obj:hat});
 
       //add size buttons
       plus = game.add.sprite(10, 10, 'plus');
@@ -72,6 +87,11 @@
       r2 = game.add.sprite(10, 310, 'r2'); 
       r2.inputEnabled = true;
       r2.events.onInputDown.add(rotate, { r : -1 } );  
+
+      //add next buttons 
+      next = game.add.sprite(10, 410, 'next'); 
+      next.inputEnabled = true;
+      next.events.onInputDown.add(next_img, {s:1});  
     }
 
     function select(){
@@ -87,6 +107,16 @@
       selected.angle += this.r;
     }
 
+    function next_img(){
+      var k = selected.key.split("_");
+      if(k[1] >= selected.max){
+        k[1] = 1;
+      }else{
+        k[1]++; 
+      }
+
+      selected.loadTexture(k[0] + "_" + k[1], 0);
+    }
   </script>
 </html>
 
