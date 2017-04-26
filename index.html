@@ -29,7 +29,10 @@
 
 
     function preload() {
-      game.load.image('face', 'res/face_1.jpg');
+      for(var i = 1;i<=4;i++){
+        game.load.image('face_'+i, 'res/face_'+i+'.jpg');
+      }
+
       for(var i = 1;i<=9;i++){
         game.load.image('hat_'+i, 'res/hat_'+i+'.png');
         game.load.image('glasses_'+i, 'res/glasses_'+i+'.png');
@@ -46,8 +49,11 @@
 
     function create() {
       //add face
-      face = game.add.sprite(game.width/2, game.height/2, 'face'); 
+      face = game.add.sprite(game.width/2, game.height/2, 'face_1'); 
+      face.max = 4;
       face.anchor.set(0.5); 
+      face.inputEnabled = true;
+      face.events.onInputDown.add(select, {obj:face});
       
       //add glasses
       glasses = game.add.sprite(game.width/2, game.height/2, 'glasses_1'); 
