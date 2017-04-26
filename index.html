@@ -30,10 +30,10 @@
 
     function preload() {
       game.load.image('face', 'res/face_1.jpg');
-      game.load.image('mus_1', 'res/mus_1.png');
       for(var i = 1;i<=9;i++){
         game.load.image('hat_'+i, 'res/hat_'+i+'.png');
         game.load.image('glasses_'+i, 'res/glasses_'+i+'.png');
+        game.load.image('mus_'+i, 'res/mus_'+i+'.png');
       }
 
       //controls
@@ -64,7 +64,7 @@
       mus.inputEnabled = true;
       mus.input.enableDrag(true);
       mus.events.onInputDown.add(select, {obj:mus});
-      mus.max = 1;
+      mus.max = 9;
       //add hat
       hat = game.add.sprite(game.width/2, game.height/2 - 100, 'hat_1');
       hat.anchor.set(0.5); 
