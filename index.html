@@ -20,6 +20,9 @@
 </body>
   <script>
     var face,glasses,selected,plus,minus,mus,hat;
+    var bspace = 75;
+    var space = bspace;
+    var bscale = .75;
     var winW = window.innerWidth;            
     var winH = window.innerHeight;
     var game = new Phaser.Game(winW, winH, Phaser.AUTO, 'faces', { preload: preload, create: create });
@@ -63,7 +66,7 @@
       mus.events.onInputDown.add(select, {obj:mus});
       mus.max = 1;
       //add hat
-      hat = game.add.sprite(game.width/2, game.height/2 - 100, 'hat_1'); 
+      hat = game.add.sprite(game.width/2, game.height/2 - 100, 'hat_1');
       hat.anchor.set(0.5); 
       hat.inputEnabled = true;
       hat.input.enableDrag(true);
@@ -72,24 +75,33 @@
 
       //add size buttons
       plus = game.add.sprite(10, 10, 'plus');
+      plus.scale.setTo(bscale);
       plus.inputEnabled = true;
       plus.events.onInputDown.add(size, { s : .1 } );  
 
-      minus = game.add.sprite(10, 110, 'minus'); 
+      minus = game.add.sprite(10, bspace, 'minus'); 
+      bspace+=space;
+      minus.scale.setTo(bscale);
       minus.inputEnabled = true;
       minus.events.onInputDown.add(size, { s : -.1 } );  
 
       //add rotate buttons 
-      r1 = game.add.sprite(10, 210, 'r1'); 
+      r1 = game.add.sprite(10, bspace, 'r1');  
+      bspace+=space;
+      r1.scale.setTo(bscale);
       r1.inputEnabled = true;
       r1.events.onInputDown.add(rotate, { r : 1 } );  
 
-      r2 = game.add.sprite(10, 310, 'r2'); 
+      r2 = game.add.sprite(10, bspace, 'r2'); 
+      bspace+=space;
+      r2.scale.setTo(bscale);
       r2.inputEnabled = true;
       r2.events.onInputDown.add(rotate, { r : -1 } );  
 
       //add next buttons 
-      next = game.add.sprite(10, 410, 'next'); 
+      next = game.add.sprite(10, bspace, 'next'); 
+      bspace+=space;
+      next.scale.setTo(bscale);
       next.inputEnabled = true;
       next.events.onInputDown.add(next_img, {s:1});  
     }
